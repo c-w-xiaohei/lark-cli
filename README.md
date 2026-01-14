@@ -41,15 +41,33 @@ make install  # Install to $GOPATH/bin
 
 ## Usage with Claude Code
 
-This tool is designed to be invoked via Claude Code skills. Example skill configuration:
+This tool is designed to be invoked via Claude Code skills. Pre-built skill definitions are included in the `skills/` directory.
 
-```yaml
-name: calendar
-description: Manage Lark calendar
----
-Run from your workspace with:
-LARK_CONFIG_DIR=/path/to/.lark ./lark cal <command>
+### Installing Skills
+
+Copy the skill directories to your Claude Code skills location:
+
+```bash
+# Project-specific (recommended)
+cp -r skills/* /path/to/your/project/.claude/skills/
+
+# Or user-wide
+cp -r skills/* ~/.claude/skills/
 ```
+
+Available skills:
+- `calendar` - Manage calendar events, check availability, RSVP
+- `contacts` - Look up users and departments
+- `documents` - Read documents, list folders, browse wikis
+- `messages` - Retrieve chat history, download attachments
+
+### Configuration
+
+The skills assume `lark` is in your PATH. If not, you can either:
+
+1. Add the binary location to your PATH
+2. Edit the skill files to use the full path
+3. Set `LARK_CONFIG_DIR` environment variable to point to your `.lark/` config directory
 
 The JSON output format makes it straightforward for AI assistants to parse responses and take action.
 
